@@ -1,4 +1,5 @@
 scrapy_dmm_dvd - A Scrapy Crawler
+[ ![Travis CI Status](https://travis-ci.org/counsellors/scrapy_dmm_dvd.svg?branch=master)](https://travis-ci.org/counsellors/scrapy_dmm_dvd)  
 =========================
 To crawl books,musics,dvd and others from dmm, based on scrapy framework and mongodb.
 
