@@ -5,15 +5,25 @@
 # See documentation in:
 # http://doc.scrapy.org/en/latest/topics/items.html
 
-import scrapy
+from scrapy.item import Item, Field
 
 
-class DmmJokeItem(scrapy.Item):
+class DmmJokeItem(Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
     pass
 
-class DVDDetailItem(scrapy.Item):
+class DVDDetailItem(Item):
     # define the fields for your item here like:
-    name = scrapy.Field()
-    pass
+    # name = scrapy.Field()
+    title = Field()
+    link = Field()
+    rental_date = Field()
+    release_date = Field()
+    actress = Field()
+    productId = Field()
+    productDmmId = Field()
+    filename = Field()
+    directory = Field()
+    publisher = Field()
+    id = Field()
