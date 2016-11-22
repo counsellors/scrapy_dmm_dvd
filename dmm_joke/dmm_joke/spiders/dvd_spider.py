@@ -3,20 +3,24 @@ import scrapy
 import os
 from scrapy.selector import Selector
 from dmm_joke.items import DVDDetailItem
+from scrapy.spiders import  CrawlSpider,Rule
+from scrapy.linkextractors import LinkExtractor
 
-
-class DvdSpiderSpider(scrapy.Spider):
+class DvdSpiderSpider(CrawlSpider):
     name = "dvd_spider"
     allowed_domains = ["dmm.com"]
     start_url_template = 'http://www.dmm.com/rental/-/list/=/sort=ranking/page='
-    # start_urls = ["http://www.dmm.com/rental/-/list/=/sort=ranking/page=2/"]
+    start_urls = ["http://www.dmm.com/en/rental/-/list/=/article=maker/id=60011/limit=30/view=text/page=2/"]
     # start_urls = ["http://www.dmm.com/en/rental/-/detail/=/cid=n_611vwdg6298r/"]
-    start_urls = ["file:///tmp/index.html"]
-    # def parse(self, response):
-    #     filename = response.url.split("/")[-2]
-    #     filepath = os.path.join("./tmp/",filename)
-    #     with open(filepath, 'wb') as f:
-    #         f.write(response.body)
+    # start_urls = ["file:///tmp/index.html"]
+    # start_urls = ["file:///tmp/index.html.1"]
+    # 再一次爬去中, scrapy在rule中是自动去重的,额，省了很多事
+    # Rule(LinkExtractor(allow=('/rental/\-/list/=/.*page', ))),
+    rules = (
+        Rule(LinkExtractor(allow=('/rental/\-/list/=/.*page=3', ))),
+        Rule(LinkExtractor(allow=('/rental/\-/detail/=/cid=\w+/', )), callback='parse_item'),
+
+    )
 
     def get_item_list(self, sel, index, field_name, item):
         detail_xpath = "//div[@class='page-detail']/table/tr/td[1]/table/tr[%s]/td[2]/a"
@@ -28,13 +32,10 @@ class DvdSpiderSpider(scrapy.Spider):
             items.append(m_field.xpath("@href").extract()[0])
             item[field_name].append(items)
 
-
-    def parse(self, response):
+    def parse_item(self, response):
         sel = Selector(response)
         items = []
         item = DVDDetailItem()
-        # item['publisher'] = self.publisher
-        # item['id'] = self.id
         item['link'] = response.url
         item['img_url'] = sel.xpath("//div[@class='page-detail']/table/tr/td[1]/div/div[@id='sample-video']/a/img/@src").extract()
         item['title'] = sel.xpath("//div[@class='page-detail']/div[@class='area-headline group']/div[@class='hreview']/h1/span/text()").extract()
@@ -47,10 +48,5 @@ class DvdSpiderSpider(scrapy.Spider):
         self.get_item_list(sel, 14, 'studios', item)
         self.get_item_list(sel, 15, 'genre', item)
         item['brief'] = sel.xpath("//div[@class='page-detail']/table[@class='mg-b12']/tr/td[1]/div/p/text()").extract()
-
-        # item['rental_date'] = sel.xpath(detail_xpath%(1)).extract()
-        # item['production_year'] = sel.xpath("//div[@class='page-detail']/table/tr/td[1]/table/tr[2]/td[2]/text()").extract()
-        print item['brief'][0]
-
         items.append(item)
         return items
