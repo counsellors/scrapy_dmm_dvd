@@ -17,9 +17,8 @@ class DVDDetailItem(Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
     m_fields = ['title','rental_date','production_year','production_country',
-                'recorded_time','performers','supervision','production',
-                'script','original','details','subtitles','sound','series','studios',
-                'genre','movie_id']
+                'recorded_time','script','original','details','subtitles','sound','series',
+                'movie_id']
     title = Field()
     link = Field()
     img_url = Field()
