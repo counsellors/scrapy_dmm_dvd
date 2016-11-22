@@ -22,6 +22,7 @@ class DVDDetailItem(Item):
                 'genre','movie_id']
     title = Field()
     link = Field()
+    img_url = Field()
     rental_date = Field()
     production_year = Field()
     production_country = Field()
@@ -38,3 +39,4 @@ class DVDDetailItem(Item):
     studios = Field()
     genre = Field()
     movie_id = Field()
+    brief = Field()

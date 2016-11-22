@@ -36,6 +36,7 @@ class DvdSpiderSpider(scrapy.Spider):
         # item['publisher'] = self.publisher
         # item['id'] = self.id
         item['link'] = response.url
+        item['img_url'] = sel.xpath("//div[@class='page-detail']/table/tr/td[1]/div/div[@id='sample-video']/a/img/@src").extract()
         item['title'] = sel.xpath("//div[@class='page-detail']/div[@class='area-headline group']/div[@class='hreview']/h1/span/text()").extract()
         detail_xpath = "//div[@class='page-detail']/table/tr/td[1]/table/tr[%s]/td[2]/text()"
         for index in xrange( len(DVDDetailItem.m_fields) ):
@@ -45,10 +46,11 @@ class DvdSpiderSpider(scrapy.Spider):
         self.get_item_list(sel, 7, 'production', item)
         self.get_item_list(sel, 14, 'studios', item)
         self.get_item_list(sel, 15, 'genre', item)
-        
+        item['brief'] = sel.xpath("//div[@class='page-detail']/table[@class='mg-b12']/tr/td[1]/div/p/text()").extract()
+
         # item['rental_date'] = sel.xpath(detail_xpath%(1)).extract()
         # item['production_year'] = sel.xpath("//div[@class='page-detail']/table/tr/td[1]/table/tr[2]/td[2]/text()").extract()
-        print item
+        print item['brief'][0]
 
         items.append(item)
         return items
