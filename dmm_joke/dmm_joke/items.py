@@ -16,14 +16,25 @@ class DmmJokeItem(Item):
 class DVDDetailItem(Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
+    m_fields = ['title','rental_date','production_year','production_country',
+                'recorded_time','performers','supervision','production',
+                'script','original','details','subtitles','sound','series','studios',
+                'genre','movie_id']
     title = Field()
     link = Field()
     rental_date = Field()
-    release_date = Field()
-    actress = Field()
-    productId = Field()
-    productDmmId = Field()
-    filename = Field()
-    directory = Field()
-    publisher = Field()
-    id = Field()
+    production_year = Field()
+    production_country = Field()
+    recorded_time = Field()
+    performers = Field()
+    supervision = Field()
+    production = Field()
+    script = Field()
+    original = Field()
+    details = Field()
+    subtitles = Field()
+    sound = Field()
+    series = Field()
+    studios = Field()
+    genre = Field()
+    movie_id = Field()
