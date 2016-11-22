@@ -25,8 +25,11 @@ scrapy crawl dvd_spider
 
 Test
 ------------
+
 local html crawl test
+
 cp dmm_joke/tmp/index.html /tmp/
+
 set start_urls to "file:///tmp/index.html" in dvd_spider.py
 
 
