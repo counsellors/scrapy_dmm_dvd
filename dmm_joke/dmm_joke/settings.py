@@ -128,7 +128,14 @@ USER_AGENTS = [
 #ITEM_PIPELINES = {
 #    'dmm_joke.pipelines.SomePipeline': 300,
 #}
-
+ITEM_PIPELINES = {  
+   'dmm_joke.pipelines.MongoDBPipeline':300,  
+}  
+  
+MONGODB_SERVER = "localhost"   
+MONGODB_PORT = 27017   
+MONGODB_DB = "dmm"   
+MONGODB_COLLECTION = "dvd"  
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
 #AUTOTHROTTLE_ENABLED = True

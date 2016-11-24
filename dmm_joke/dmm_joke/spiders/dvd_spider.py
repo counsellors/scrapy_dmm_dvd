@@ -12,15 +12,15 @@ class DvdSpiderSpider(CrawlSpider):
     start_url_template = 'http://www.dmm.com/rental/-/list/=/sort=ranking/page='
     start_urls = ["http://www.dmm.com/en/rental/-/list/=/article=maker/id=60011/limit=30/view=text/page=2/"]
     # start_urls = ["http://www.dmm.com/en/rental/-/detail/=/cid=n_611vwdg6298r/"]
-    # start_urls = ["file:///tmp/index.html"]
+    start_urls = ["file:///tmp/index.html"]
     # start_urls = ["file:///tmp/index.html.1"]
     # 再一次爬去中, scrapy在rule中是自动去重的,额，省了很多事
     # Rule(LinkExtractor(allow=('/rental/\-/list/=/.*page', ))),
-    rules = (
-        Rule(LinkExtractor(allow=('/rental/\-/list/=/.*page=3', ))),
-        Rule(LinkExtractor(allow=('/rental/\-/detail/=/cid=\w+/', )), callback='parse_item'),
+    # rules = (
+    #     Rule(LinkExtractor(allow=('/rental/\-/list/=/.*page=3', ))),
+    #     Rule(LinkExtractor(allow=('/rental/\-/detail/=/cid=\w+/', )), callback='parse_item'),
 
-    )
+    # )
 
     def get_item_list(self, sel, index, field_name, item):
         detail_xpath = "//div[@class='page-detail']/table/tr/td[1]/table/tr[%s]/td[2]/a"
@@ -32,7 +32,7 @@ class DvdSpiderSpider(CrawlSpider):
             items.append(m_field.xpath("@href").extract()[0])
             item[field_name].append(items)
 
-    def parse_item(self, response):
+    def parse(self, response):
         sel = Selector(response)
         items = []
         item = DVDDetailItem()
@@ -48,5 +48,5 @@ class DvdSpiderSpider(CrawlSpider):
         self.get_item_list(sel, 14, 'studios', item)
         self.get_item_list(sel, 15, 'genre', item)
         item['brief'] = sel.xpath("//div[@class='page-detail']/table[@class='mg-b12']/tr/td[1]/div/p/text()").extract()
-        items.append(item)
-        return items
+        # items.append(item)
+        yield item
