@@ -36,7 +36,7 @@ set start_urls to "file:///tmp/index.html" in dvd_spider.py
 To Do List
 ----------
 
-- add mongodb
+- <s>add mongodb</s>
 - find all details url in some page
 - duplicate url
 - add proxy pool or via tor
