@@ -124,6 +124,13 @@ USER_AGENTS = [
 #}
 
 # Configure item pipelines
+ITEM_PIPELINES = {'dmm_joke.pipelines.MongoDBPipeline':300, }
+
+MONGODB_SERVER = "localhost"
+MONGODB_PORT = 27017
+MONGODB_DB = "dmm_dvd"
+MONGODB_COLLECTION = "west"
+
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 #ITEM_PIPELINES = {
 #    'dmm_joke.pipelines.SomePipeline': 300,

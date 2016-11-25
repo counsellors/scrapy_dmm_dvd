@@ -39,3 +39,4 @@ class DVDDetailItem(Item):
     genre = Field()
     movie_id = Field()
     brief = Field()
+    slogan = Field()
