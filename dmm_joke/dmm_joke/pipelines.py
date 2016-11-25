@@ -29,7 +29,8 @@ class MongoDBPipeline(object):
         if valid:
             self.collection.update({'link': item['link']},
                                    dict(item), upsert=True)
-            logging.log(logging.INFO, 'Question added to MongoDB database!')
+            logging.log(logging.INFO, 'Movie added to MongoDB database!')
+
         return item
 
 class DmmJokePipeline(object):
