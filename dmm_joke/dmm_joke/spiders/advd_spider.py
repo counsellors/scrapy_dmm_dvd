@@ -11,8 +11,7 @@ class AdvdSpiderSpider(CrawlSpider):
     name = "advd_spider"
     allowed_domains = ["dmm.com"]
     start_urls = ['http://www.dmm.com/ppr']
-    start_urls = ["file:///tmp/index3.html"]
-    start_urls = ["file:///tmp/black1.html"]
+    start_urls = ["file:///tmp/advd_detail.html"]
     # 再一次爬去中, scrapy在rule中是自动去重的,额，省了很多事
     # Rule(LinkExtractor(allow=('/rental/\-/list/=/.*page', ))),
     # rules = (
@@ -55,7 +54,6 @@ class AdvdSpiderSpider(CrawlSpider):
         item['recorded_time'] = sel.xpath("//div[@class='page-detail']/table/tr/td[1]/table/tr[4]/td[2]/text()").extract()
         item['series'] = sel.xpath("//div[@class='page-detail']/table/tr/td[1]/table/tr[7]/td[2]/text()").extract()
         item['movie_id'] = sel.xpath("//*[@id='mu']/div/table/tr/td[1]/table/tr[11]/td[2]/text()").extract()
-        item['average_rating'] = sel.xpath("//*[@id='mu']/div/table/tr/td[1]/table/tr[12]/td[2]/img/@src").extract()
         item['brief'] = sel.xpath("//*[@id='mu']/div/table/tr/td[1]/div[4]/text()").extract()
         self.get_item_list(sel, 5, 'performers', item)
         self.get_item_list(sel, 6, 'supervision', item)
@@ -64,9 +62,10 @@ class AdvdSpiderSpider(CrawlSpider):
         self.get_item_list(sel, 10, 'genre', item)
         self.get_img_list(sel, 'sample_images', item)
         item['total_comment_num'] = 0
-        if not item['average_rating'][0].endswith("0.gif"):
-            item['total_comment_num'] = int(response.xpath("//*[@id='review']/div[2]/div/div[1]/div/p[2]/strong/text()").extract()[0])
-        # now_time=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") 
-        # item['create_time'] = now_time
-        # item['update_time'] = now_time
+        try:
+            item['average_rating'] = sel.xpath("//*[@id='mu']/div/table/tr/td[1]/table/tr[12]/td[2]/img/@src").extract()
+            if not item['average_rating'][0].endswith("0.gif"):
+                item['total_comment_num'] = int(response.xpath("//*[@id='review']/div[2]/div/div[1]/div/p[2]/strong/text()").extract()[0])
+        except Exception, e:
+            item['average_rating'] = 0
         yield item

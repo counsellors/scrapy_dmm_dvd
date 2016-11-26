@@ -26,20 +26,23 @@ class MongoDBPipeline(object):
 
     def process_item(self, item, spider):
         now_time=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") 
+        table_name = 'unkown'
         valid = True
         for data in item:
             if not data:
                 valid = False
                 raise DropItem('Missing {0}'.format(data))
         if item.get('m_type') is None:
-            raise DropItem('Missing item {0} type for mongodb'.format(item['link']))
+           logging.log(logging.WARN, 'Missing item {0} type for mongodb'.format(item['link']))
+        else:
+            table_name = item.get('m_type')
         if valid:
-            if (self.collections[item['m_type']].find({"link":item['link']}).count() ==0):
+            if (self.collections[table_name].find({"link":item['link']}).count() ==0):
                 item['create_time'] = now_time
                 item['update_time'] = now_time
             else:
                 item['update_time'] = now_time
-            self.collections[item['m_type']].update({'link': item['link']},
+            self.collections[table_name].update({'link': item['link']},
                                    dict(item), upsert=True)
             logging.log(logging.INFO, 'Movie added to MongoDB database!')
 

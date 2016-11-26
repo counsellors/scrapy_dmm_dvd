@@ -14,8 +14,6 @@ class DmmJokeItem(Item):
     pass
 
 class DVDDetailItem(Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
     m_fields = ['title','rental_date','production_year','production_country',
                 'recorded_time','script','original','details','subtitles','sound','series',
                 'movie_id']
@@ -44,11 +42,6 @@ class DVDDetailItem(Item):
 
 
 class ADVDDetailItem(Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    m_fields = ['title','delivery_start_date','release_date','recorded_time',
-                'performers','supervision','series','studios','lables','genre','movie_id',
-                'average_rating']
     m_type = Field()
     title = Field()
     link = Field()
@@ -68,5 +61,14 @@ class ADVDDetailItem(Item):
     brief = Field()
     sample_images = Field()
     total_comment_num = Field()
+    create_time = Field()
+    update_time = Field()
+
+class ADVDDetailListItem(Item):
+    m_type = Field()
+    link = Field()
+    img_url = Field()
+    img_desc = Field()
+    price = Field()
     create_time = Field()
     update_time = Field()

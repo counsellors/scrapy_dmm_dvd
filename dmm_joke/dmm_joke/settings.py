@@ -136,7 +136,7 @@ ITEM_PIPELINES = {
 MONGODB_SERVER = "localhost"   
 MONGODB_PORT = 27017   
 MONGODB_DB = "dmm"   
-MONGODB_COLLECTION = ['dvd', 'advd']
+MONGODB_COLLECTION = ['dvd', 'advd','advd_list','unkown']
 
 
 # Enable and configure the AutoThrottle extension (disabled by default)
