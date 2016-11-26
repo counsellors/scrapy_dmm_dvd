@@ -36,6 +36,7 @@ class DvdSpiderSpider(CrawlSpider):
         sel = Selector(response)
         items = []
         item = DVDDetailItem()
+        item['m_type'] = 'dvd'
         item['link'] = response.url
         item['img_url'] = sel.xpath("//div[@class='page-detail']/table/tr/td[1]/div/div[@id='sample-video']/a/img/@src").extract()
         item['title'] = sel.xpath("//div[@class='page-detail']/div[@class='area-headline group']/div[@class='hreview']/h1/span/text()").extract()

@@ -19,6 +19,7 @@ class DVDDetailItem(Item):
     m_fields = ['title','rental_date','production_year','production_country',
                 'recorded_time','script','original','details','subtitles','sound','series',
                 'movie_id']
+    m_type = Field()
     title = Field()
     link = Field()
     img_url = Field()
@@ -40,3 +41,31 @@ class DVDDetailItem(Item):
     movie_id = Field()
     brief = Field()
     slogan = Field()
+
+
+class ADVDDetailItem(Item):
+    # define the fields for your item here like:
+    # name = scrapy.Field()
+    m_fields = ['title','delivery_start_date','release_date','recorded_time',
+                'performers','supervision','series','studios','lables','genre','movie_id',
+                'average_rating']
+    m_type = Field()
+    title = Field()
+    link = Field()
+    img_url = Field()
+    platform = Field()
+    delivery_start_date = Field()
+    release_date = Field()
+    recorded_time = Field()
+    performers = Field()
+    supervision = Field()
+    series = Field()
+    studios = Field()
+    lables = Field()
+    genre = Field()
+    movie_id = Field()
+    average_rating = Field()
+    brief = Field()
+    sample_images = Field()
+    create_time = Field()
+    update_time = Field()
