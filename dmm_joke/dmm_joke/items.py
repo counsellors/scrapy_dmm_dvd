@@ -67,5 +67,6 @@ class ADVDDetailItem(Item):
     average_rating = Field()
     brief = Field()
     sample_images = Field()
+    total_comment_num = Field()
     create_time = Field()
     update_time = Field()

@@ -63,6 +63,9 @@ class AdvdSpiderSpider(CrawlSpider):
         self.get_item_list(sel, 9, 'lables', item)
         self.get_item_list(sel, 10, 'genre', item)
         self.get_img_list(sel, 'sample_images', item)
+        item['total_comment_num'] = 0
+        if not item['average_rating'][0].endswith("0.gif"):
+            item['total_comment_num'] = int(response.xpath("//*[@id='review']/div[2]/div/div[1]/div/p[2]/strong/text()").extract()[0])
         # now_time=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") 
         # item['create_time'] = now_time
         # item['update_time'] = now_time
