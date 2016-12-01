@@ -40,6 +40,14 @@ class DVDDetailItem(Item):
     brief = Field()
     slogan = Field()
 
+class DVDDetailListItem(Item):
+    m_type = Field()
+    link = Field()
+    img_url = Field()
+    img_desc = Field()
+    price = Field()
+    create_time = Field()
+    update_time = Field()
 
 class ADVDDetailItem(Item):
     m_type = Field()

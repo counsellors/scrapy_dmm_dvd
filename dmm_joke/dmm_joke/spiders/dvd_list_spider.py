@@ -13,7 +13,7 @@ class DvdListSpiderSpider(CrawlSpider):
     start_urls = ['http://www.dmm.com/rental/ppr/-/list/=/article=category/id=japanese/limit=120/sort=date/page=2']
     # start_urls = ["file:///tmp/dvd_genre.html"]
     rules = (
-        Rule(LinkExtractor(allow=('rental/ppr/-/list/=/article=category/id=japanese/', ),
+        Rule(LinkExtractor(allow=('rental/ppr/-/list/=/article=category/id=japanese/limit=120/sort=date/page', ),
             deny =('limit=30','limit=60','view=text',) 
             ), callback='parse_item',follow=True),
     )

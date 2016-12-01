@@ -16,7 +16,7 @@ NEWSPIDER_MODULE = 'dmm_joke.spiders'
 
 COOKIES_ENABLED=False
 
-DOWNLOAD_DELAY=2
+DOWNLOAD_DELAY=1
 
 #取消默认的useragent,使用新的useragent  
 DOWNLOADER_MIDDLEWARES = {  
@@ -25,6 +25,8 @@ DOWNLOADER_MIDDLEWARES = {
     }  
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'dmm_joke (+http://www.yourdomain.com)'
+
+
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
@@ -83,14 +85,14 @@ USER_AGENTS = [
 ]
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
-CONCURRENT_REQUESTS = 8
+CONCURRENT_REQUESTS = 16
 
 # Configure a delay for requests for the same website (default: 0)
 # See http://scrapy.readthedocs.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
 #DOWNLOAD_DELAY = 3
 # The download delay setting will honor only one of:
-CONCURRENT_REQUESTS_PER_DOMAIN = 4
+CONCURRENT_REQUESTS_PER_DOMAIN = 8
 #CONCURRENT_REQUESTS_PER_IP = 16
 
 # Disable cookies (enabled by default)
@@ -129,15 +131,26 @@ CONCURRENT_REQUESTS_PER_DOMAIN = 4
 #ITEM_PIPELINES = {
 #    'dmm_joke.pipelines.SomePipeline': 300,
 #}
+
+# # Enables scheduling storing requests queue in redis.
+# SCHEDULER = "scrapy_redis.scheduler.Scheduler"
+
+# # Ensure all spiders share same duplicates filter through redis.
+# DUPEFILTER_CLASS = "scrapy_redis.dupefilter.RFPDupeFilter"
+
+# ITEM_PIPELINES = {  
+#    'dmm_joke.pipelines.MongoDBPipeline':300,  
+#    'scrapy_redis.pipelines.RedisPipeline': 200
+# }  
+  
 ITEM_PIPELINES = {  
    'dmm_joke.pipelines.MongoDBPipeline':300,  
 }  
-  
+
 MONGODB_SERVER = "localhost"   
 MONGODB_PORT = 27017   
 MONGODB_DB = "dmm"   
-MONGODB_COLLECTION = ['dvd', 'advd','advd_list','unkown']
-
+MONGODB_COLLECTION = ['dvd', 'advd','advd_list','dvd_list','unkown']
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
