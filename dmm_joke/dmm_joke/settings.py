@@ -132,20 +132,21 @@ CONCURRENT_REQUESTS_PER_DOMAIN = 8
 #    'dmm_joke.pipelines.SomePipeline': 300,
 #}
 
-# # Enables scheduling storing requests queue in redis.
-# SCHEDULER = "scrapy_redis.scheduler.Scheduler"
+# Enables scheduling storing requests queue in redis.
+SCHEDULER = "scrapy_redis.scheduler.Scheduler"
 
-# # Ensure all spiders share same duplicates filter through redis.
-# DUPEFILTER_CLASS = "scrapy_redis.dupefilter.RFPDupeFilter"
+# Ensure all spiders share same duplicates filter through redis.
+DUPEFILTER_CLASS = "scrapy_redis.dupefilter.RFPDupeFilter"
 
+ITEM_PIPELINES = {  
+   'scrapy_redis.pipelines.RedisPipeline': 200,
+   'dmm_joke.pipelines.MongoDBPipeline':300,  
+
+}  
+  
 # ITEM_PIPELINES = {  
 #    'dmm_joke.pipelines.MongoDBPipeline':300,  
-#    'scrapy_redis.pipelines.RedisPipeline': 200
 # }  
-  
-ITEM_PIPELINES = {  
-   'dmm_joke.pipelines.MongoDBPipeline':300,  
-}  
 
 MONGODB_SERVER = "localhost"   
 MONGODB_PORT = 27017   

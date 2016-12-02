@@ -6,12 +6,21 @@ from scrapy.selector import Selector
 from dmm_joke.items import ADVDDetailItem
 from scrapy.spiders import  CrawlSpider,Rule
 from scrapy.linkextractors import LinkExtractor
+import pymongo
+from scrapy.conf import settings
 
 class AdvdSpiderSpider(CrawlSpider):
     name = "advd_spider"
     allowed_domains = ["dmm.com"]
-    start_urls = ['http://www.dmm.com/ppr']
-    start_urls = ["file:///tmp/advd_detail.html"]
+    def __init__(self):
+        self.client = pymongo.MongoClient(
+            settings['MONGODB_SERVER'],
+            settings['MONGODB_PORT']
+        )
+        self.db = self.client.get_database(settings['MONGODB_DB'])
+        self.start_urls = self.db.advd_list.distinct('link')
+    # start_urls = ['http://www.dmm.com/ppr']
+    # start_urls = ["file:///tmp/advd_detail.html"]
     # 再一次爬去中, scrapy在rule中是自动去重的,额，省了很多事
     # Rule(LinkExtractor(allow=('/rental/\-/list/=/.*page', ))),
     # rules = (
