@@ -37,8 +37,8 @@ To Do List
 ----------
 
 - <s>add mongodb</s>
-- find all details url in some page
-- duplicate url
+- <s>find all details url in some pageb</s>
+- <s>duplicate urlb</s>
 - add proxy pool or via tor
 - save image by pipeline
 - distributed system
