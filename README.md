@@ -13,6 +13,7 @@ Requirements
 * mongodb
 * scrapy-redis
 * redis
+
 That's all. It's base package of python environment!
 
 
