@@ -6,9 +6,12 @@ from scrapy.selector import Selector
 from dmm_joke.items import DVDDetailListItem
 from scrapy.spiders import  CrawlSpider,Rule
 from scrapy.linkextractors import LinkExtractor
+from scrapy_redis.spiders import RedisCrawlSpider
 
-class DvdListSpiderSpider(CrawlSpider):
+
+class DvdListSpiderSpider(RedisCrawlSpider):
     name = "dvd_list_spider"
+    redis_key = 'dvd_list_spider:start_urls'
     allowed_domains = ["dmm.com"]
     start_urls = ['http://www.dmm.com/rental/ppr/-/list/=/article=category/id=japanese/limit=120/sort=date/page=2']
     # start_urls = ["file:///tmp/dvd_genre.html"]

@@ -10,7 +10,6 @@ from scrapy_redis.spiders import RedisCrawlSpider
 
 class AdvdListSpiderSpider(RedisCrawlSpider):
     name = "advd_list_spider"
-    redis_key = 'advd_list_spider:start_urls'
     allowed_domains = ["dmm.com"]
     # start_urls = ["file:///tmp/detail_list.html"]
     start_urls = ["file:///tmp/advd_genre.html"]

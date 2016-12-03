@@ -139,8 +139,8 @@ SCHEDULER = "scrapy_redis.scheduler.Scheduler"
 DUPEFILTER_CLASS = "scrapy_redis.dupefilter.RFPDupeFilter"
 
 ITEM_PIPELINES = {  
+   'scrapy_redis.pipelines.RedisPipeline': 200,
    'dmm_joke.pipelines.MongoDBPipeline':300,  
-   'scrapy_redis.pipelines.RedisPipeline': 200
 }  
   
 # ITEM_PIPELINES = {  

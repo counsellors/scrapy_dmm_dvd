@@ -5,6 +5,7 @@ from scrapy.selector import Selector
 from dmm_joke.items import DVDDetailItem
 from scrapy.spiders import  CrawlSpider,Rule
 from scrapy.linkextractors import LinkExtractor
+from scrapy_redis.spiders import RedisCrawlSpider
 
 class DvdSpiderSpider(CrawlSpider):
     name = "dvd_spider"
