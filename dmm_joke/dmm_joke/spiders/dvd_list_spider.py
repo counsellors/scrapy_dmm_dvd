@@ -9,9 +9,8 @@ from scrapy.linkextractors import LinkExtractor
 from scrapy_redis.spiders import RedisCrawlSpider
 
 
-class DvdListSpiderSpider(RedisCrawlSpider):
+class DvdListSpiderSpider(CrawlSpider):
     name = "dvd_list_spider"
-    redis_key = 'dvd_list_spider:start_urls'
     allowed_domains = ["dmm.com"]
     start_urls = ['http://www.dmm.com/rental/ppr/-/list/=/article=category/id=japanese/limit=120/sort=date/page=2']
     # start_urls = ["file:///tmp/dvd_genre.html"]
