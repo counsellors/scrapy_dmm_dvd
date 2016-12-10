@@ -37,8 +37,11 @@ class DVDDetailItem(Item):
     studios = Field()
     genre = Field()
     movie_id = Field()
+    average_rating = Field()
     brief = Field()
     slogan = Field()
+    create_time = Field()
+    update_time = Field()
 
 class DVDDetailListItem(Item):
     m_type = Field()

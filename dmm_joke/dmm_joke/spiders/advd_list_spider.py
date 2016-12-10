@@ -24,7 +24,6 @@ class AdvdListSpiderSpider(RedisCrawlSpider):
     def parse_item(self, response):
         sel = Selector(response)
         items = []
-        print "lalla",response
         sel_list = sel.xpath("//*[@id='list']/li")
         for m_field in sel_list:
             print "extract field.."
