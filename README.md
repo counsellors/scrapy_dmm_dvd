@@ -41,6 +41,7 @@ To Do List
 - <s>add mongodb</s>
 - <s>find all details url in some pageb</s>
 - <s>duplicate urlb</s>
+- ascript to feed mongodb's urls to redis
 - add proxy pool or via tor
 - save image by pipeline
 - distributed system
